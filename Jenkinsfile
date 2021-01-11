@@ -17,7 +17,8 @@ pipeline {
         }
         stage ('pkg-build') {
             steps {
-                    sh 'mvn -o -Dmaven.test.skip=true  clean package'
+                    sh 'mvn -v'
+                    sh 'mvn clean install'
             }
         }
         stage ('docker-build') {
