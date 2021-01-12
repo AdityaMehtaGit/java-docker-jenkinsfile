@@ -39,8 +39,8 @@ pipeline {
         steps {
 
             rtServer (
-                id: $JFROG_ARTIFACTORY_ID,
-                url: $JFROG_ARTIFACTORY_URL,
+                id: '$JFROG_ARTIFACTORY_ID',
+                url: '$JFROG_ARTIFACTORY_URL',
                 // If you're using username and password:
                 // username: 'docker',
                 // password: 'Docker@1',
