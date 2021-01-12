@@ -1,12 +1,12 @@
 pipeline {
     agent any
     environment {
-        registry = "AdityaMehtaGit/java-docker-jenkins"
-        DOCKER_CREDENTIAL_ID = 'dockerhub-id'
-        GITHUB_CREDENTIAL_ID = 'github-id'
-        // KUBECONFIG_CREDENTIAL_ID = 'demo-kubeconfig'
-        REGISTRY = 'docker.io'
-        APP_NAME = 'HelloWorld'
+        // registry = "AdityaMehtaGit/java-docker-jenkins"
+        // DOCKER_CREDENTIAL_ID = 'dockerhub-id'
+        // GITHUB_CREDENTIAL_ID = 'github-id'
+        // // KUBECONFIG_CREDENTIAL_ID = 'demo-kubeconfig'
+        // REGISTRY = 'docker.io'
+        // APP_NAME = 'HelloWorld'
     }
 
     stages {
@@ -54,12 +54,12 @@ rtServer (
 )
             rtDockerPush(
                 serverId: "jrog",
-                image: "java-docker/hello-world:latest",
+                image: 'java-docker/hello-world:latest',
                 // image: ARTIFACTORY_DOCKER_REGISTRY + '/hello-world:latest',
                 // Host:
                 // On OSX: 'tcp://127.0.0.1:1234'
                 // On Linux can be omitted or null
-                host: 'unix:///var/run/docker.sock',
+                // host: 'unix:///var/run/docker.sock',
                 targetRepo: 'java-docker', // where to copy to 
                 // Attach custom properties to the published artifacts:
                 properties: 'project-name=docker;status=stable'
