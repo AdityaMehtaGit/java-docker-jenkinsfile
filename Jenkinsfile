@@ -25,7 +25,7 @@ pipeline {
         stage ('docker-build') {
             steps {
     
-                    sh 'docker build -t java-docker/hello-world:latest .'
+                    sh 'docker build -t localhost:8082/java-docker/hello-world:latest .'
                     // withCredentials([usernamePassword(passwordVariable : 'DOCKER_PASSWORD' ,usernameVariable : 'DOCKER_USERNAME' ,credentialsId : "$DOCKER_CREDENTIAL_ID" ,)]) 
                     //  {
                     //     sh 'echo "$DOCKER_PASSWORD" | docker login $REGISTRY -u "$DOCKER_USERNAME" --password-stdin'
@@ -40,7 +40,7 @@ pipeline {
 
 rtServer (
     id: 'jfrog',
-    url: 'https://localhost:8082/artifactory',
+    url: 'localhost:8082',
     // If you're using username and password:
     username: 'docker',
     password: 'Docker@1',
