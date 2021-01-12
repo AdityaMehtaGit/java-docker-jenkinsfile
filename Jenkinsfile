@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        // registry = "AdityaMehtaGit/java-docker-jenkins"
+         registry = "java-docker/hello-world"
         // DOCKER_CREDENTIAL_ID = 'dockerhub-id'
         // GITHUB_CREDENTIAL_ID = 'github-id'
         // // KUBECONFIG_CREDENTIAL_ID = 'demo-kubeconfig'
