@@ -2,11 +2,11 @@ pipeline {
     agent any
     environment {
          registry = "java-docker/hello-world"
-        // DOCKER_CREDENTIAL_ID = 'dockerhub-id'
-        // GITHUB_CREDENTIAL_ID = 'github-id'
-        // // KUBECONFIG_CREDENTIAL_ID = 'demo-kubeconfig'
-        // REGISTRY = 'docker.io'
-        // APP_NAME = 'HelloWorld'
+         JFROG_ARTIFACTORY_URL = 'localhost:8082/'
+         JFROG_ARTIFACTORY_NAME = 'java-docker'
+         JFROG_ARTIFACTORY_ID = 'jfrog'
+         APP_NAME = 'hello-world'
+         TAG = 'latest'
     }
 
     stages {
@@ -25,10 +25,10 @@ pipeline {
         stage ('docker-build') {
             steps {
     
-                    sh 'docker build -t localhost:8082/java-docker/hello-world:latest .'
+                    sh 'docker build -t $JFROG_ARTIFACTORY_URL/$JFROG_ARTIFACTORY_NAME/$APP_NAME:$TAG .'
                     // withCredentials([usernamePassword(passwordVariable : 'DOCKER_PASSWORD' ,usernameVariable : 'DOCKER_USERNAME' ,credentialsId : "$DOCKER_CREDENTIAL_ID" ,)]) 
                     //  {
-                    //     sh 'echo "$DOCKER_PASSWORD" | docker login $REGISTRY -u "$DOCKER_USERNAME" --password-stdin'
+                    //   sh 'echo "$DOCKER_PASSWORD" | docker login $REGISTRY -u "$DOCKER_USERNAME" --password-stdin'
                     //     sh 'docker push  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER'
                     //  }
                  
@@ -38,23 +38,23 @@ pipeline {
         stage ('Push image to Artifactory') { // take that image and push to artifactory
         steps {
 
-rtServer (
-    id: 'jfrog',
-    url: 'localhost:8082',
-    // If you're using username and password:
-    username: 'docker',
-    password: 'Docker@1',
-    // If you're using Credentials ID:
-    // credentialsId: '8a999032-067a-4a43-9036-3675f3676437',
-    // If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
-    bypassProxy: true,
-    // Configure the connection timeout (in seconds).
-    // The default value (if not configured) is 300 seconds:
-    timeout: 300
-)
+            rtServer (
+                id: $JFROG_ARTIFACTORY_ID,
+                url: $JFROG_ARTIFACTORY_URL,
+                // If you're using username and password:
+                // username: 'docker',
+                // password: 'Docker@1',
+                // If you're using Credentials ID:
+                credentialsId: '8a999032-067a-4a43-9036-3675f3676437',
+                // If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
+                bypassProxy: true,
+                // Configure the connection timeout (in seconds).
+                // The default value (if not configured) is 300 seconds:
+                timeout: 300
+            )
             rtDockerPush(
                 serverId: "jrog",
-                image: 'localhost:8082/java-docker/hello-world:latest',
+                image: $JFROG_ARTIFACTORY_URL/$JFROG_ARTIFACTORY_NAME/$APP_NAME:$TAG,
                 // image: ARTIFACTORY_DOCKER_REGISTRY + '/hello-world:latest',
                 // Host:
                 // On OSX: 'tcp://127.0.0.1:1234'
@@ -67,9 +67,9 @@ rtServer (
                 // buildName: 'my-build-name',
                 // buildNumber: '17', 
             )
-             rtPublishBuildInfo (
-                 serverId: 'jfrog'
-            )
+            //  rtPublishBuildInfo (
+            //      serverId: 'jfrog'
+            // )
 
             }
         }
