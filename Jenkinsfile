@@ -54,13 +54,13 @@ pipeline {
             )
             rtDockerPush(
                 serverId: "jrog",
-                image: '$JFROG_ARTIFACTORY_URL/$JFROG_ARTIFACTORY_NAME/$APP_NAME:$TAG',
+                image: "$JFROG_ARTIFACTORY_URL/$JFROG_ARTIFACTORY_NAME/$APP_NAME:$TAG",
                 // image: ARTIFACTORY_DOCKER_REGISTRY + '/hello-world:latest',
                 // Host:
                 // On OSX: 'tcp://127.0.0.1:1234'
                 // On Linux can be omitted or null
                 // host: 'unix:///var/run/docker.sock',
-                targetRepo: '$JFROG_ARTIFACTORY_NAME', // where to copy to 
+                targetRepo: "$JFROG_ARTIFACTORY_NAME", // where to copy to 
                 // Attach custom properties to the published artifacts:
                 properties: 'project-name=docker;status=stable'
                 // If the build name and build number are not set here, the current job name and number will be used:
