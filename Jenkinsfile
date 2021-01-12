@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
          registry = "java-docker/hello-world"
-         JFROG_ARTIFACTORY_URL = 'localhost:8082/'
+         JFROG_ARTIFACTORY_URL = 'localhost:8082'
          JFROG_ARTIFACTORY_NAME = 'java-docker'
          JFROG_ARTIFACTORY_ID = 'jfrog'
          APP_NAME = 'hello-world'
