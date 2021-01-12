@@ -6,6 +6,7 @@ pipeline {
         GITHUB_CREDENTIAL_ID = 'github-id'
         // KUBECONFIG_CREDENTIAL_ID = 'demo-kubeconfig'
         REGISTRY = 'docker.io'
+        APP_NAME = 'HelloWorld'
     }
 
     stages {
@@ -17,13 +18,14 @@ pipeline {
         }
         stage ('pkg-build') {
             steps {
-                    sh 'mvn -o -Dmaven.test.skip=true  clean package'
+                    sh 'mvn clean install'
+                    sh 'mvn clean package'
             }
         }
         stage ('docker-build') {
             steps {
     
-                    sh 'docker build -f Dockerfile-online -t $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER .'
+                    sh 'docker build -t $REGISTRY/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER .'
                     // withCredentials([usernamePassword(passwordVariable : 'DOCKER_PASSWORD' ,usernameVariable : 'DOCKER_USERNAME' ,credentialsId : "$DOCKER_CREDENTIAL_ID" ,)]) 
                     //  {
                     //     sh 'echo "$DOCKER_PASSWORD" | docker login $REGISTRY -u "$DOCKER_USERNAME" --password-stdin'
