@@ -54,7 +54,7 @@ rtServer (
 )
             rtDockerPush(
                 serverId: "jrog",
-                image: 'java-docker/hello-world:latest',
+                image: 'localhost:8082/java-docker/hello-world:latest',
                 // image: ARTIFACTORY_DOCKER_REGISTRY + '/hello-world:latest',
                 // Host:
                 // On OSX: 'tcp://127.0.0.1:1234'
