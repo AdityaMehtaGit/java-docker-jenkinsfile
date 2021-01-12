@@ -20,7 +20,7 @@ pipeline {
         stage('unit test') {
             steps {
                      //  sh 'cd avcc/WEB-UI/mitsubishi-operator-ui/scripts/  &&  npm run test'
-                       sh "echo "Tests will back""
+                       sh 'echo "Tests will back"'
              }
             }
         stage ('pkg-build') {
