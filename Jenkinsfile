@@ -60,7 +60,7 @@ pipeline {
                 // On OSX: 'tcp://127.0.0.1:1234'
                 // On Linux can be omitted or null
                 // host: 'unix:///var/run/docker.sock',
-                targetRepo: 'java-docker', // where to copy to 
+                targetRepo: '$JFROG_ARTIFACTORY_NAME', // where to copy to 
                 // Attach custom properties to the published artifacts:
                 properties: 'project-name=docker;status=stable'
                 // If the build name and build number are not set here, the current job name and number will be used:
