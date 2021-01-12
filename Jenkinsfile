@@ -40,7 +40,7 @@ pipeline {
 
 rtServer (
     id: 'jfrog',
-    url: 'http://localhost:8082/artifactory',
+    url: 'https://localhost:8082/artifactory',
     // If you're using username and password:
     username: 'docker',
     password: 'Docker@1',
