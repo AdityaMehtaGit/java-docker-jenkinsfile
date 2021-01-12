@@ -38,7 +38,7 @@ pipeline {
         stage ('Push image to Artifactory') { // take that image and push to artifactory
         steps {
             rtDockerPush(
-                serverId: "jFrog-ar1",
+                serverId: "jrog",
                 image: "java-docker/hello-world:latest",
                 host: 'tcp://localhost:2375',
                 targetRepo: 'java-docker', // where to copy to 
