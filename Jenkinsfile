@@ -32,11 +32,9 @@ pipeline {
            stage('Code Quality Check via SonarQube') {
               steps {
                   script {
-                            //  def scannerHome = tool 'sonarqube';
-                           //  withSonarQubeEnv("sonarqube-container") {
-                            //def BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+                           
                             sh 'export SONAR_SCANNER_OPTS="-Xmx2048m"'
-                            sh "/opt/sonar-scanner/bin/sonar-scanner   -Dsonar.projectKey=KEY -Dsonar.projectVersion=RELEASE_release -Dsonar.exclusions=  -Dsonar.sources= -Dsonar.java.binaries=  -Dsonar.qualitygate=  -Dsonar.host.url=http://172.19.58.68:8009   -Dsonar.login="
+                      //      sh "/opt/sonar-scanner/bin/sonar-scanner   -Dsonar.projectKey=KEY -Dsonar.projectVersion=RELEASE_release -Dsonar.exclusions=  -Dsonar.sources= -Dsonar.java.binaries=  -Dsonar.qualitygate=  -Dsonar.host.url=http://172.19.58.68:8009   -Dsonar.login="
                           }
                       }
                   }
