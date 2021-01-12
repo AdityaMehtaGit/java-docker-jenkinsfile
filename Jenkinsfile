@@ -16,12 +16,30 @@ pipeline {
                 checkout(scm)
             }
         }
+
+        stage('unit test') {
+            steps {
+                     //  sh 'cd avcc/WEB-UI/mitsubishi-operator-ui/scripts/  &&  npm run test'
+                       sh "echo "Tests will back""
+             }
+            }
         stage ('pkg-build') {
             steps {
                     sh 'mvn clean install'
                     sh 'mvn clean package'
             }
         }
+           stage('Code Quality Check via SonarQube') {
+              steps {
+                  script {
+                            //  def scannerHome = tool 'sonarqube';
+                           //  withSonarQubeEnv("sonarqube-container") {
+                            //def BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+                            sh 'export SONAR_SCANNER_OPTS="-Xmx2048m"'
+                            sh "/opt/sonar-scanner/bin/sonar-scanner   -Dsonar.projectKey=KEY -Dsonar.projectVersion=RELEASE_release -Dsonar.exclusions=  -Dsonar.sources= -Dsonar.java.binaries=  -Dsonar.qualitygate=  -Dsonar.host.url=http://172.19.58.68:8009   -Dsonar.login="
+                          }
+                      }
+                  }
         stage ('docker-build') {
             steps {
     
@@ -38,20 +56,20 @@ pipeline {
         stage ('Push image to Artifactory') { // take that image and push to artifactory
         steps {
 
-            rtServer (
-                id: '$JFROG_ARTIFACTORY_ID',
-                url: '$JFROG_ARTIFACTORY_URL',
-                // If you're using username and password:
-                // username: 'XXXXX',
-                // password: 'XXXX',
-                // If you're using Credentials ID:
-                credentialsId: '8a999032-067a-4a43-9036-3675f3676437',
-                // If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
-                bypassProxy: true,
-                // Configure the connection timeout (in seconds).
-                // The default value (if not configured) is 300 seconds:
-                timeout: 300
-            )
+                // rtServer (
+                //     id: '$JFROG_ARTIFACTORY_ID',
+                //     url: '$JFROG_ARTIFACTORY_URL',
+                //     // If you're using username and password:
+                //     // username: 'XXXXX',
+                //     // password: 'XXXX',
+                //     // If you're using Credentials ID:
+                //     credentialsId: '8a999032-067a-4a43-9036-3675f3676437',
+                //     // If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
+                //     bypassProxy: true,
+                //     // Configure the connection timeout (in seconds).
+                //     // The default value (if not configured) is 300 seconds:
+                //     timeout: 300
+                // )
             rtDockerPush(
                 serverId: "jrog",
                 image: "$JFROG_ARTIFACTORY_URL/$JFROG_ARTIFACTORY_NAME/$APP_NAME:$TAG",
