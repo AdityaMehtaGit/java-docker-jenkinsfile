@@ -54,7 +54,7 @@ pipeline {
             )
             rtDockerPush(
                 serverId: "jrog",
-                image: $JFROG_ARTIFACTORY_URL/$JFROG_ARTIFACTORY_NAME/$APP_NAME:$TAG,
+                image: '$JFROG_ARTIFACTORY_URL/$JFROG_ARTIFACTORY_NAME/$APP_NAME:$TAG',
                 // image: ARTIFACTORY_DOCKER_REGISTRY + '/hello-world:latest',
                 // Host:
                 // On OSX: 'tcp://127.0.0.1:1234'
