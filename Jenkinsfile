@@ -25,7 +25,7 @@ pipeline {
         stage ('docker-build') {
             steps {
     
-                    sh 'docker build -t $REGISTRY/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER .'
+                    sh 'docker build -t java-docker/hello-world:latest .'
                     // withCredentials([usernamePassword(passwordVariable : 'DOCKER_PASSWORD' ,usernameVariable : 'DOCKER_USERNAME' ,credentialsId : "$DOCKER_CREDENTIAL_ID" ,)]) 
                     //  {
                     //     sh 'echo "$DOCKER_PASSWORD" | docker login $REGISTRY -u "$DOCKER_USERNAME" --password-stdin'
@@ -33,6 +33,18 @@ pipeline {
                     //  }
                  
             }
+        }
+
+        stage ('Push image to Artifactory') { // take that image and push to artifactory
+        steps {
+            rtDockerPush(
+                serverId: "jFrog-ar1",
+                image: "java-docker/hello-world:latest",
+                host: 'tcp://localhost:2375',
+                targetRepo: 'java-docker', // where to copy to 
+                // Attach custom properties to the published artifacts:
+                properties: 'project-name=docker1;status=stable'
+            )
         }
 
     }
