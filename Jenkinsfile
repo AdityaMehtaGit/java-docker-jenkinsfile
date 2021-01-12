@@ -40,7 +40,7 @@ pipeline {
             rtDockerPush(
                 serverId: "jrog",
                 image: "java-docker/hello-world:latest",
-                host: 'tcp://localhost:2375',
+                // host: 'tcp://localhost:2375',
                 targetRepo: 'java-docker', // where to copy to 
                 // Attach custom properties to the published artifacts:
                 properties: 'project-name=docker1;status=stable'
