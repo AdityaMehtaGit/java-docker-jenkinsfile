@@ -42,8 +42,8 @@ rtServer (
     id: 'jfrog',
     url: 'http://localhost:8082/artifactory',
     // If you're using username and password:
-    username: 'admin',
-    password: 'Aditya@mehta1',
+    // username: 'admin',
+    // password: 'Aditya@mehta1',
     // If you're using Credentials ID:
     credentialsId: '8a999032-067a-4a43-9036-3675f3676437',
     // If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
