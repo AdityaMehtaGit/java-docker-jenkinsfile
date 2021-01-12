@@ -42,8 +42,8 @@ pipeline {
                 id: '$JFROG_ARTIFACTORY_ID',
                 url: '$JFROG_ARTIFACTORY_URL',
                 // If you're using username and password:
-                // username: 'docker',
-                // password: 'Docker@1',
+                // username: 'XXXXX',
+                // password: 'XXXX',
                 // If you're using Credentials ID:
                 credentialsId: '8a999032-067a-4a43-9036-3675f3676437',
                 // If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
