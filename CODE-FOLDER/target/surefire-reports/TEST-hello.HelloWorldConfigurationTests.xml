@@ -58,5 +58,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="testGreeting" classname="hello.HelloWorldConfigurationTests" time="0.303"/>
+  <testcase name="testGreeting" classname="hello.HelloWorldConfigurationTestsNew" time="0.303"/>
 </testsuite>
