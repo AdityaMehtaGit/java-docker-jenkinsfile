@@ -20,6 +20,7 @@ pipeline {
         stage('Test') {
             steps {
                 // sh 'cd FOLDER'
+                sh 'cd CODE-FOLDER'
                 sh 'mvn test'
             }
             post {
@@ -30,6 +31,7 @@ pipeline {
         }
         stage ('pkg-build') {
             steps {
+                    sh 'cd CODE-FOLDER'
                     sh 'mvn clean install'
                     sh 'mvn clean package'
             }
@@ -37,6 +39,7 @@ pipeline {
            stage('Code Quality Check via SonarQube') {
               steps {
                   script {
+                           sh 'cd CODE-FOLDER'
                            sh 'mvn sonar:sonar \
   -Dsonar.projectKey=docker \
   -Dsonar.host.url=http://localhost:9000 \
@@ -48,7 +51,7 @@ pipeline {
                   }
         stage ('docker-build') {
             steps {
-    
+                    sh 'cd CODE-FOLDER'
                     sh 'docker build -t $JFROG_ARTIFACTORY_URL/$JFROG_ARTIFACTORY_NAME/$APP_NAME:$TAG .'
                     // withCredentials([usernamePassword(passwordVariable : 'DOCKER_PASSWORD' ,usernameVariable : 'DOCKER_USERNAME' ,credentialsId : "$DOCKER_CREDENTIAL_ID" ,)]) 
                     //  {
