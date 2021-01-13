@@ -6,7 +6,7 @@ pipeline {
          JFROG_ARTIFACTORY_NAME = 'java-docker'
          JFROG_ARTIFACTORY_ID = 'jfrog'
          APP_NAME = 'hello-world'
-         TAG = 'latest'
+         TAG = '1.0'
     }
 
     stages {
