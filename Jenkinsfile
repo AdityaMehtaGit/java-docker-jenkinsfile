@@ -17,12 +17,17 @@ pipeline {
             }
         }
 
-        stage('unit test') {
+        stage('Test') {
             steps {
-                     //  sh 'cd avcc/WEB-UI/mitsubishi-operator-ui/scripts/  &&  npm run test'
-                       sh 'echo "Tests will back"'
-             }
+                // sh 'cd FOLDER'
+                sh 'mvn test'
             }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
         stage ('pkg-build') {
             steps {
                     sh 'mvn clean install'
