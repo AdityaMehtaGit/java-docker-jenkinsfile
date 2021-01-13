@@ -32,8 +32,11 @@ pipeline {
            stage('Code Quality Check via SonarQube') {
               steps {
                   script {
-                           
-                            sh 'export SONAR_SCANNER_OPTS="-Xmx2048m"'
+                           sh 'mvn sonar:sonar \
+  -Dsonar.projectKey=docker \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.login=a47ac1c8adec62e31a251366a139cf5c363ab79e'
+                            //sh 'export SONAR_SCANNER_OPTS="-Xmx2048m"'
                       //      sh "/opt/sonar-scanner/bin/sonar-scanner   -Dsonar.projectKey=KEY -Dsonar.projectVersion=RELEASE_release -Dsonar.exclusions=  -Dsonar.sources= -Dsonar.java.binaries=  -Dsonar.qualitygate=  -Dsonar.host.url=http://172.19.58.68:8009   -Dsonar.login="
                           }
                       }
